@@ -1,0 +1,78 @@
+/* assets/style.css */
+
+/* Estilo geral do corpo da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais moderna */
+    background-color: #eef1f5; /* Um fundo levemente acinzentado para a área de conteúdo */
+}
+
+/* Estilos para a Sidebar */
+.sidebar-custom { /* Vamos adicionar esta classe à nossa sidebar no Python */
+    background-color: #ffffff; /* Fundo branco para a sidebar */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border-right: 1px solid #dee2e6;
+}
+
+.sidebar-custom .nav-link {
+    color: #555; /* Cor dos links */
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: 0.3rem; /* Cantos levemente arredondados para os links */
+}
+
+.sidebar-custom .nav-link:hover {
+    background-color: #e9ecef;
+    color: #007bff; /* Cor ao passar o mouse, pode ser a cor primária do seu tema */
+}
+
+.sidebar-custom .nav-link.active { /* Link ativo */
+    background-color: #0d6efd; /* Cor primária do Bootstrap (azul), ajuste conforme seu tema */
+    color: white;
+    font-weight: bold;
+}
+
+.sidebar-logo {
+    max-width: 150px; /* Ajuste o tamanho do logo */
+    margin-bottom: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebar-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-lead-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos para a Área de Conteúdo Principal */
+.content-custom {
+    background-color: #ffffff; /* Fundo branco para o conteúdo */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos para Cards */
+.card {
+    border: none; /* Remove a borda padrão do card se o tema tiver */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Sombra mais suave para cards */
+}
+
+/* Estilos para Botões (exemplo para o botão primário) */
+.btn-primary {
+    /* Você pode sobrescrever estilos de botões aqui se o tema não for suficiente */
+    /* Ex: border-radius: 20px; font-weight: bold; */
+}
+
+/* Ajustes gerais de Títulos */
+h1, h2, h3, h4, h5, h6 {
+    color: #343a40; /* Cor mais escura para títulos */
+}
