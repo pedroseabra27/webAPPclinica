@@ -3,6 +3,11 @@ from dash import html, dcc
 from app import app
 from app.components.sidebar import sidebar
 from app.utils.constants import CONTENT_STYLE
+from app.database import engine # Importe a engine
+from app.models.paciente_model import Base as PacienteBase # Importe a Base do seu modelo
+
+# Criar tabelas do banco de dados (se não existirem)
+PacienteBase.metadata.create_all(bind=engine) # Isso garante que a tabela de pacientes seja criada
 
 # Importar todos os callbacks para registrá-los
 from app.callbacks import navigation, pacientes_callbacks, exames_callbacks, suites_callbacks

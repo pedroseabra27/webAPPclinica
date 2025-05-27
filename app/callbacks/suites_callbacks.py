@@ -2,7 +2,9 @@ from dash import Input, Output, State, html, callback_context, ALL, no_update, d
 import dash_bootstrap_components as dbc
 from datetime import datetime, timedelta
 from app import app
-from app.models.data_store import pacientes_cadastrados_web, marcacoes_suites, TOTAL_SUITES
+from app.models.data_store import marcacoes_suites, TOTAL_SUITES # Mantenha o resto
+from app.models.paciente_model import Paciente # Importe o modelo Paciente
+from app.database import SessionLocal # Importe SessionLocal
 
 # Callback para atualizar a visualização das suítes e resumo
 @app.callback(
@@ -29,57 +31,59 @@ def renderizar_pagina_suites(data_selecionada_str, n_confirm_marcar, n_confirm_r
     
     cards_suites = []
     suites_ocupadas_count = 0
-
-    for suite_id in range(1, TOTAL_SUITES + 1):
-        ocupada = suite_id in marcacoes_do_dia
-        card_body_content = []
-        header_class = "bg-success text-white" # Disponível por padrão
-
-        if ocupada:
-            suites_ocupadas_count += 1
-            header_class = "bg-danger text-white" # Ocupada
-            info_marcacao = marcacoes_do_dia[suite_id]
-            paciente_id = info_marcacao['paciente_id']
-            paciente_nome = "Desconhecido"
-            if 0 <= paciente_id < len(pacientes_cadastrados_web):
-                paciente_nome = pacientes_cadastrados_web[paciente_id]['nome']
-            
-            card_body_content = [
-                html.H5(paciente_nome, className="card-title"),
-                html.P(f"Horário: {info_marcacao['hora_inicio']} - {info_marcacao['hora_fim']}"),
-                dbc.Button("Remover Marcação", id={"type": "btn-remover-suite", "index": suite_id}, color="warning", size="sm")
-            ]
-        else:
-            card_body_content = [
-                html.H5("Disponível", className="card-title"),
-                dbc.Button("Marcar Exame", id={"type": "btn-marcar-suite", "index": suite_id}, color="primary", size="sm")
-            ]
-        
-        card = dbc.Col(
-            dbc.Card([
-                dbc.CardHeader(f"Suíte {suite_id}", className=header_class),
-                dbc.CardBody(card_body_content)
-            ]), 
-            width=12, md=6, lg=4, className="mb-3" # Ajuste de colunas para responsividade
-        )
-        cards_suites.append(card)
     
-    grid_layout = dbc.Row(cards_suites)
-    suites_disponiveis_count = TOTAL_SUITES - suites_ocupadas_count
+    db = SessionLocal() # Abrir sessão para buscar nomes de pacientes
+    try:
+        for suite_id in range(1, TOTAL_SUITES + 1):
+            ocupada = suite_id in marcacoes_do_dia
+            card_body_content = []
+            header_class = "bg-success text-white" # Disponível por padrão
 
-    # Atualizar lista de pacientes agendados
-    lista_pacientes_agendados_html = []
-    if marcacoes_do_dia:
-        for suite_id, info in marcacoes_do_dia.items():
-            paciente_id = info['paciente_id']
-            paciente_nome = "Desconhecido"
-            if 0 <= paciente_id < len(pacientes_cadastrados_web):
-                paciente_nome = pacientes_cadastrados_web[paciente_id]['nome']
-            lista_pacientes_agendados_html.append(
-                dbc.ListGroupItem(f"Suíte {suite_id}: {paciente_nome} ({info['hora_inicio']} - {info['hora_fim']})")
+            if ocupada:
+                suites_ocupadas_count += 1
+                header_class = "bg-danger text-white" # Ocupada
+                info_marcacao = marcacoes_do_dia[suite_id]
+                paciente_id_db = info_marcacao['paciente_id'] # Este é o ID do banco
+                paciente_db = db.query(Paciente).filter(Paciente.id == paciente_id_db).first()
+                paciente_nome = paciente_db.nome_completo if paciente_db else "Paciente não encontrado"
+                
+                card_body_content = [
+                    html.H5(paciente_nome, className="card-title"),
+                    html.P(f"Horário: {info_marcacao['hora_inicio']} - {info_marcacao['hora_fim']}"),
+                    dbc.Button("Remover Marcação", id={"type": "btn-remover-suite", "index": suite_id}, color="warning", size="sm")
+                ]
+            else:
+                card_body_content = [
+                    html.H5("Disponível", className="card-title"),
+                    dbc.Button("Marcar Exame", id={"type": "btn-marcar-suite", "index": suite_id}, color="primary", size="sm")
+                ]
+            
+            card = dbc.Col(
+                dbc.Card([
+                    dbc.CardHeader(f"Suíte {suite_id}", className=header_class),
+                    dbc.CardBody(card_body_content)
+                ]), 
+                width=12, md=6, lg=4, className="mb-3" # Ajuste de colunas para responsividade
             )
-    else:
-        lista_pacientes_agendados_html = [html.P("Nenhum paciente agendado para esta data.", className="text-muted")]
+            cards_suites.append(card)
+        
+        grid_layout = dbc.Row(cards_suites)
+        suites_disponiveis_count = TOTAL_SUITES - suites_ocupadas_count
+
+        # Atualizar lista de pacientes agendados
+        lista_pacientes_agendados_html = []
+        if marcacoes_do_dia:
+            for suite_id_loop, info_loop in marcacoes_do_dia.items():
+                paciente_id_db_loop = info_loop['paciente_id']
+                paciente_db_loop = db.query(Paciente).filter(Paciente.id == paciente_id_db_loop).first()
+                paciente_nome_loop = paciente_db_loop.nome_completo if paciente_db_loop else "Paciente não encontrado"
+                lista_pacientes_agendados_html.append(
+                    dbc.ListGroupItem(f"Suíte {suite_id_loop}: {paciente_nome_loop} ({info_loop['hora_inicio']} - {info_loop['hora_fim']})")
+                )
+        else:
+            lista_pacientes_agendados_html = [html.P("Nenhum paciente agendado para esta data.", className="text-muted")]
+    finally:
+        db.close()
 
     return grid_layout, str(suites_disponiveis_count), str(suites_ocupadas_count), data_formatada_usuario, lista_pacientes_agendados_html
 
@@ -130,7 +134,13 @@ def abrir_modal_marcar_suite(n_clicks_marcar, data_selecionada_str):
     triggered_prop_id = ctx.triggered_id
     suite_id_clicada = triggered_prop_id["index"]
     
-    opcoes_pacientes = [{"label": p['nome'], "value": idx} for idx, p in enumerate(pacientes_cadastrados_web)]
+    # Buscar pacientes do banco de dados
+    db = SessionLocal()
+    try:
+        pacientes_db = db.query(Paciente).all()
+        opcoes_pacientes = [{"label": p.nome_completo, "value": p.id} for p in pacientes_db] # Usar p.id como value
+    finally:
+        db.close()
     
     titulo_modal = f"Marcar Suíte {suite_id_clicada} para {datetime.strptime(data_selecionada_str, '%Y-%m-%d').strftime('%d/%m/%Y')}"
 
@@ -155,13 +165,13 @@ def fechar_modal_marcar_suite_cancelar(n_clicks):
     Input("btn-confirmar-marcar-suite", "n_clicks"),
     State("store-suite-selecionada-id", "data"),
     State("store-data-selecionada-para-modal", "data"), # Usar a data armazenada
-    State("dropdown-paciente-suite", "value"),
+    State("dropdown-paciente-suite", "value"), # Este valor agora será o ID do paciente do banco
     State("input-hora-inicio", "value"),
     State("input-hora-fim", "value"),
     prevent_initial_call=True
 )
-def confirmar_marcacao_suite_action(n_clicks, suite_id, data_selecionada_str, paciente_id, hora_inicio, hora_fim):
-    if not n_clicks or paciente_id is None or suite_id is None or data_selecionada_str is None:
+def confirmar_marcacao_suite_action(n_clicks, suite_id, data_selecionada_str, paciente_id_db, hora_inicio, hora_fim): # paciente_id_db
+    if not n_clicks or paciente_id_db is None or suite_id is None or data_selecionada_str is None:
         # Adicionar um alerta aqui seria bom se os campos não forem preenchidos
         return no_update 
 
@@ -174,7 +184,7 @@ def confirmar_marcacao_suite_action(n_clicks, suite_id, data_selecionada_str, pa
         return True # Mantém o modal aberto para o usuário ver o erro (precisaria de um componente de alerta no modal)
 
     marcacoes_suites[data_selecionada_str][suite_id] = {
-        'paciente_id': paciente_id,
+        'paciente_id': paciente_id_db, # Armazenar o ID do banco de dados
         'hora_inicio': hora_inicio,
         'hora_fim': hora_fim,
         'status': 'agendado'

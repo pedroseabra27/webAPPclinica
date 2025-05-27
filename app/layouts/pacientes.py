@@ -1,7 +1,15 @@
 from dash import html
 import dash_bootstrap_components as dbc
+# Importe as funções e o modelo necessários
+from app.callbacks.pacientes_callbacks import get_all_pacientes_from_db # Reutilizar a função
 
 def layout_pacientes():
+    pacientes_do_banco = get_all_pacientes_from_db()
+    if not pacientes_do_banco:
+        elementos_lista_inicial = [html.P("Nenhum paciente cadastrado no banco de dados.")]
+    else:
+        elementos_lista_inicial = [dbc.ListGroup([dbc.ListGroupItem(f"{p.nome_completo} (CPF: {p.cpf})") for p in pacientes_do_banco])]
+
     return dbc.Container([
         dbc.Row([
             dbc.Col(html.H3("Gerenciamento de Pacientes", className="my-4"))
@@ -40,7 +48,8 @@ def layout_pacientes():
 
             dbc.Col([
                 html.H4("Pacientes Cadastrados:", className="mt-md-0"),
-                html.Div(id="lista-pacientes-div-pacientes", children=[html.P("Nenhum paciente cadastrado.")])
+                # A lista de pacientes agora é preenchida inicialmente aqui
+                html.Div(id="lista-pacientes-div-pacientes", children=elementos_lista_inicial) 
             ], md=6)
         ])
     ], fluid=True, className="content-custom")
