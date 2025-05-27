@@ -1,5 +1,5 @@
 import dash
-from dash import Input, Output, State, callback_context, html
+from dash import Input, Output, State, html, callback_context, ALL
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import numpy as np
@@ -326,14 +326,12 @@ def toggle_modal_paciente(n_abrir, n_fechar, is_open):
 # Callback para atualizar informações do paciente selecionado
 @app.callback(
     Output("info-paciente-exame", "children"),
-    [Input(f"paciente-item-{i}", "n_clicks") for i in range(20)],  # Suporta até 20 pacientes
-    Output("modal-selecionar-paciente", "is_open"),
-    State("modal-selecionar-paciente", "is_open")
+    Output("modal-selecionar-paciente", "is_open", allow_duplicate=True),
+    Input({"type": "paciente-item", "index": ALL}, "n_clicks"),
+    State("modal-selecionar-paciente", "is_open"),
+    prevent_initial_call=True
 )
-def selecionar_paciente(*args):
-    n_clicks_list = args[:-1]  # Os cliques de todos os itens
-    is_open = args[-1]  # Estado atual do modal
-    
+def selecionar_paciente(n_clicks_list, is_open):
     ctx = dash.callback_context
     if not ctx.triggered or not any(n > 0 for n in n_clicks_list):
         return [html.P("Nenhum paciente selecionado.", className="text-muted")], is_open

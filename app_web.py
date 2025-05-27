@@ -5,7 +5,7 @@ from app.components.sidebar import sidebar
 from app.utils.constants import CONTENT_STYLE
 
 # Importar todos os callbacks para registrá-los
-from app.callbacks import navigation, pacientes_callbacks, exames_callbacks
+from app.callbacks import navigation, pacientes_callbacks, exames_callbacks, suites_callbacks
 
 # Layout Principal da Aplicação
 content_wrapper = html.Div(id="page-content")  # Wrapper para o conteúdo principal

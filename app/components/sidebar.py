@@ -27,6 +27,7 @@ sidebar = html.Div(
                 dbc.NavLink("Home", href="/", active="exact"),
                 dbc.NavLink("Cadastro de Pacientes", href="/pacientes", active="exact"),
                 dbc.NavLink("Visualizar Exames", href="/exames", active="exact"),
+                dbc.NavLink("Gerenciamento de Suítes", href="/suites", active="exact"),  # Adicionado aqui
             ],
             vertical=True,
             pills=True,
