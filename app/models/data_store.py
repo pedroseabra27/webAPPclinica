@@ -5,7 +5,9 @@ from datetime import datetime, timedelta
 # Esta lista será populada a partir do banco de dados onde for necessário,
 # ou os callbacks acessarão o banco diretamente.
 pacientes_cadastrados_web = [] 
-dados_plot_exame = [np.zeros(500) for _ in range(8)]
+NUM_CANAIS_EXAME = 32
+PONTOS_GRAFICO_EXAME = 500 # Mantendo 500 pontos por canal para visualização
+dados_plot_exame = [np.zeros(PONTOS_GRAFICO_EXAME) for _ in range(NUM_CANAIS_EXAME)]
 ptr_exame = 0
 
 # Dados para gerenciamento de suítes

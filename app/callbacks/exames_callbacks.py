@@ -1,11 +1,14 @@
 import dash
-from dash import Input, Output, State, html, callback_context, ALL
+from dash import Input, Output, State, html, callback_context, ALL, no_update
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import numpy as np
 from datetime import datetime
 from app import app
-from app.models.data_store import dados_plot_exame, ptr_exame, pacientes_cadastrados_web
+from app.models.data_store import dados_plot_exame, ptr_exame, pacientes_cadastrados_web, NUM_CANAIS_EXAME, PONTOS_GRAFICO_EXAME
+import logging # Adicionar logging
+
+logger = logging.getLogger(__name__) # Configurar logger para este módulo
 
 # Estado global simulado para o exame
 ESTADO_EXAME = {
@@ -612,3 +615,97 @@ def controlar_visibilidade_estágios(tamanho_janela):
         return {"display": "block"}
     else:
         return {"display": "none"}
+
+from dash import Input, Output, State, no_update, callback_context # Modificado aqui
+import plotly.graph_objs as go
+import numpy as np
+from app import app
+from app.models.data_store import dados_plot_exame, ptr_exame, NUM_CANAIS_EXAME, PONTOS_GRAFICO_EXAME
+
+# Simulação de dados para 32 canais
+def simular_novos_dados_exame():
+    global ptr_exame
+    novos_dados_batch = []
+    for i in range(NUM_CANAIS_EXAME):
+        # Gerar dados diferentes para cada canal para melhor visualização
+        # Ex: senoides com frequências/amplitudes diferentes ou ruído com offsets
+        frequencia_base = (i + 1) * 0.5 
+        amplitude_base = 5 + i 
+        ruido = np.random.randn() * (2 + i*0.2) # Ruído diferente por canal
+        novo_ponto = np.sin(ptr_exame * 0.02 * frequencia_base) * amplitude_base + ruido
+        novos_dados_batch.append(novo_ponto)
+    
+    ptr_exame += 1
+    return novos_dados_batch
+
+@app.callback(
+    Output('interval-component-exames', 'disabled'),
+    Output('store-estado-exame', 'data'),
+    Output('btn-iniciar-exame', 'disabled'),
+    Output('btn-pausar-exame', 'disabled'),
+    Input('btn-iniciar-exame', 'n_clicks'),
+    Input('btn-pausar-exame', 'n_clicks'),
+    State('store-estado-exame', 'data'),
+    prevent_initial_call=True
+)
+def controlar_estado_exame(n_iniciar, n_pausar, estado_atual):
+    # Adicionar logs para depuração
+    logger.info(f"Callback 'controlar_estado_exame' acionado.")
+    logger.info(f"n_iniciar: {n_iniciar}, n_pausar: {n_pausar}, estado_atual: {estado_atual}")
+
+    ctx = callback_context # Usar dash.callback_context
+    if not ctx.triggered:
+        logger.warning("Nenhum input acionou o callback 'controlar_estado_exame'. Retornando no_update para tudo.")
+        return no_update, no_update, no_update, no_update
+
+    triggered_id = ctx.triggered_id
+    logger.info(f"ID do componente que acionou: {triggered_id}")
+
+    if triggered_id == 'btn-iniciar-exame':
+        logger.info("Botão 'Iniciar' clicado. Configurando para rodar.")
+        # Intervalo habilitado (disabled=False), rodando=True, Botão Iniciar desabilitado, Botão Pausar habilitado
+        return False, {'rodando': True}, True, False
+    elif triggered_id == 'btn-pausar-exame':
+        logger.info("Botão 'Pausar' clicado. Configurando para pausar.")
+        # Intervalo desabilitado (disabled=True), rodando=False, Botão Iniciar habilitado, Botão Pausar desabilitado
+        return True, {'rodando': False}, False, True
+    
+    logger.warning(f"ID do gatilho '{triggered_id}' não esperado no callback 'controlar_estado_exame'. Retornando no_update.")
+    return no_update, no_update, no_update, no_update
+
+
+@app.callback(
+    Output('live-graph-exames', 'figure'),
+    Input('interval-component-exames', 'n_intervals'),
+    State('store-estado-exame', 'data') 
+)
+def update_graph_live_exames(n, estado_exame):
+    if not estado_exame['rodando'] and n > 0 : # Se não estiver rodando E não for o primeiro carregamento
+        return no_update # Não atualiza o gráfico se estiver pausado
+
+    novos_dados = simular_novos_dados_exame()
+
+    traces = []
+    for i in range(NUM_CANAIS_EXAME):
+        dados_plot_exame[i][:-1] = dados_plot_exame[i][1:]
+        dados_plot_exame[i][-1] = novos_dados[i]
+        
+        offset_vertical = i * 20 
+
+        trace = go.Scatter(
+            y=dados_plot_exame[i] + offset_vertical,
+            name=f'Canal {i+1}',
+            mode='lines',
+        )
+        traces.append(trace)
+
+    layout = go.Layout(
+        xaxis=dict(title='Tempo (amostras)', showticklabels=False, zeroline=False, showgrid=False), 
+        yaxis=dict(title='Amplitude + Offset', showticklabels=False, zeroline=False, showgrid=False), 
+        showlegend=False, 
+        margin=dict(l=20, r=20, t=30, b=20), 
+        plot_bgcolor='rgba(0,0,0,0)',  
+        paper_bgcolor='rgba(0,0,0,0)', 
+    )
+
+    return {'data': traces, 'layout': layout}
