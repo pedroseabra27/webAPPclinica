@@ -1,0 +1,122 @@
+
+0 - Pedido na data 23/06/2025 - Valor a pagar: R$ 33,46
+
+0 - IDENTIFICADOR: 11922 NOME: Cartao de papel Pardo: R$ 3,93
+1 - IDENTIFICADOR: 11711 NOME: Cola Ocre: R$ 3,77
+2 - IDENTIFICADOR: 16851 NOME: Fita de correcao Azul escuro: R$ 9,95
+3 - IDENTIFICADOR: 17290 NOME: Pasta de plastico Vermelho indiano: R$ 9,19
+4 - IDENTIFICADOR: 12986 NOME: Tesoura Kiwi: R$ 2,28
+5 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+6 - IDENTIFICADOR: 11794 NOME: Apagador Ambar: R$ 2,33
+
+1 - Pedido na data 23/06/2025 - Valor a pagar: R$ 14,34
+
+0 - IDENTIFICADOR: 14179 NOME: Furador Marrom rosado: R$ 7,24
+1 - IDENTIFICADOR: 13090 NOME: Etiqueta grande Orquidea clara: R$ 2,35
+2 - IDENTIFICADOR: 11088 NOME: Cartucho de tinta Laranja: R$ 2,74
+3 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+
+2 - Pedido na data 23/06/2025 - Valor a pagar: R$ 39,73
+
+0 - IDENTIFICADOR: 17383 NOME: Apontador Verde claro: R$ 8,75
+1 - IDENTIFICADOR: 15320 NOME: Clipe Verde fluorescente: R$ 6,74
+2 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+3 - IDENTIFICADOR: 15199 NOME: Papel quadriculado Acafrao: R$ 8,08
+4 - IDENTIFICADOR: 15392 NOME: Papel para impressora Jade: R$ 9,51
+5 - IDENTIFICADOR: 12505 NOME: Lapis de cor Amarelo escuro: R$ 4,63
+
+3 - Pedido na data 23/06/2025 - Valor a pagar: R$ 32,68
+
+0 - IDENTIFICADOR: 17491 NOME: Regua Dourado escuro: R$ 2,29
+1 - IDENTIFICADOR: 14216 NOME: Apagador Naval: R$ 10,08
+2 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+3 - IDENTIFICADOR: 16539 NOME: Elastico Azul piscina: R$ 3,19
+4 - IDENTIFICADOR: 11764 NOME: Regua Violeta claro : R$ 8,89
+5 - IDENTIFICADOR: 12419 NOME: Lapis Violeta: R$ 6,22
+
+4 - Pedido na data 23/06/2025 - Valor a pagar: R$ 38,71
+
+0 - IDENTIFICADOR: 16978 NOME: Regua Azul topazio: R$ 9,26
+1 - IDENTIFICADOR: 14019 NOME: Papel colorido Verde lima: R$ 9,29
+2 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+3 - IDENTIFICADOR: 12284 NOME: Caneta marcador Verde oliva: R$ 4,66
+4 - IDENTIFICADOR: 13155 NOME: Regua Branco fantasma: R$ 2,62
+5 - IDENTIFICADOR: 16515 NOME: Cola em bastao Gengibre : R$ 2,56
+6 - IDENTIFICADOR: 11874 NOME: Fita adesiva Caqui escuro: R$ 3,42
+7 - IDENTIFICADOR: 17589 NOME: Bloco de notas Azul brasilis: R$ 4,88
+
+5 - Pedido na data 23/06/2025 - Valor a pagar: R$ 44,49
+
+0 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+1 - IDENTIFICADOR: 13693 NOME: Clipe Marrom: R$ 7,98
+2 - IDENTIFICADOR: 10653 NOME: Clipe Jade: R$ 7,73
+3 - IDENTIFICADOR: 15518 NOME: Peso de papel Rosa profundo: R$ 10,34
+4 - IDENTIFICADOR: 14875 NOME: Grampo Couro: R$ 3,07
+5 - IDENTIFICADOR: 16113 NOME: Liquido de correcao Gengibre : R$ 5,71
+6 - IDENTIFICADOR: 14375 NOME: Furador Verde escuro: R$ 7,65
+
+6 - Pedido na data 23/06/2025 - Valor a pagar: R$ 22,57
+
+0 - IDENTIFICADOR: 15914 NOME: Etiqueta pequena Violeta: R$ 7,33
+1 - IDENTIFICADOR: 12266 NOME: Fita de correcao Dourado: R$ 3,35
+2 - IDENTIFICADOR: 16414 NOME: Compasso Mocassim: R$ 3,60
+3 - IDENTIFICADOR: 10095 NOME: Papel cartao Carmim: R$ 6,28
+4 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+
+7 - Pedido na data 23/06/2025 - Valor a pagar: R$ 32,42
+
+0 - IDENTIFICADOR: 14908 NOME: Furador Verde oliva: R$ 3,73
+1 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+2 - IDENTIFICADOR: 11227 NOME: Caderno Branco floral: R$ 8,48
+3 - IDENTIFICADOR: 15676 NOME: Alfinete Tangerina: R$ 9,87
+4 - IDENTIFICADOR: 16337 NOME: Giz de cera Ebano: R$ 8,32
+
+8 - Pedido na data 23/06/2025 - Valor a pagar: R$ 27,82
+
+0 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+1 - IDENTIFICADOR: 13527 NOME: Apagador Orquidea: R$ 7,77
+2 - IDENTIFICADOR: 15201 NOME: Tesoura Gengibre : R$ 9,78
+3 - IDENTIFICADOR: 10561 NOME: Ficheiro Azul claro: R$ 8,25
+
+9 - Pedido na data 23/06/2025 - Valor a pagar: R$ 14,18
+
+0 - IDENTIFICADOR: 13151 NOME: Fita de correcao Ferrugem: R$ 9,67
+1 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+2 - IDENTIFICADOR: 11205 NOME: Clipe Ouro : R$ 2,50
+
+10 - Pedido na data 23/06/2025 - Valor a pagar: R$ 27,55
+
+0 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+1 - IDENTIFICADOR: 12478 NOME: Papel reciclado Azul bebe: R$ 8,79
+2 - IDENTIFICADOR: 16418 NOME: Lapis Prata: R$ 9,44
+3 - IDENTIFICADOR: 15873 NOME: Caneta esferografica Dourado escuro: R$ 7,30
+
+11 - Pedido na data 23/06/2025 - Valor a pagar: R$ 26,24
+
+0 - IDENTIFICADOR: 13615 NOME: Esquadro Anil: R$ 4,08
+1 - IDENTIFICADOR: 13470 NOME: Papel reciclado Branco: R$ 7,20
+2 - IDENTIFICADOR: 14493 NOME: Fita adesiva Orquidea clara: R$ 7,50
+3 - IDENTIFICADOR: 12408 NOME: Grampo Oliva: R$ 5,44
+4 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+
+12 - Pedido na data 23/06/2025 - Valor a pagar: R$ 53,65
+
+0 - IDENTIFICADOR: 16362 NOME: Bloco de notas Laranja claro: R$ 8,07
+1 - IDENTIFICADOR: 13537 NOME: Alfinete Azul turquesa: R$ 7,54
+2 - IDENTIFICADOR: 14664 NOME: Calculadora Fucsia : R$ 11,37
+3 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+4 - IDENTIFICADOR: 15450 NOME: Bloco de notas Azul turquesa: R$ 4,30
+5 - IDENTIFICADOR: 11582 NOME: Tachinha Carmesim: R$ 9,72
+6 - IDENTIFICADOR: 12555 NOME: Esquadro Cinza ardosia: R$ 3,27
+7 - IDENTIFICADOR: 13581 NOME: Pasta de papel Salmao claro: R$ 7,38
+
+13 - Pedido na data 23/06/2025 - Valor a pagar: R$ 35,21
+
+0 - IDENTIFICADOR: 14444 NOME: Peso de papel Verde claro: R$ 2,01
+1 - IDENTIFICADOR: 11459 NOME: Ficheiro Turquesa media: R$ 5,12
+2 - IDENTIFICADOR: 13397 NOME: Cartao de papel Madeira: R$ 6,18
+3 - IDENTIFICADOR: 16442 NOME: Cartolina Cinza ardosia: R$ 6,82
+4 - IDENTIFICADOR: 12899 NOME: Caneta-tinteiro Naval: R$ 11,33
+5 - IDENTIFICADOR: 16850 NOME: Papel reciclado Verde menta: R$ 3,74
+
+
