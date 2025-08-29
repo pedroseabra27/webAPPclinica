@@ -32,5 +32,13 @@ if __name__ == '__main__':
 
     app.run(debug=debug, host=host, port=port)
 
+def main():
+    """Função principal para execução direta"""
+    debug = os.getenv('DEBUG', 'False').lower() == 'true'
+    host = os.getenv('HOST', '0.0.0.0')
+    port = int(os.getenv('PORT', 8000))
+
+    app.run(debug=debug, host=host, port=port)
+
 # Expor o servidor para Gunicorn
 server = app.server

@@ -1,0 +1,16 @@
+[phases.setup]
+nixPkgs = ["python311", "gcc", "gfortran", "make"]
+
+[phases.install]
+cmds = [
+  "pip install --upgrade pip",
+  "pip install -r requirements.txt"
+]
+
+[phases.build]
+cmds = [
+  "echo 'Build phase completed'"
+]
+
+[start]
+cmd = "gunicorn app_web:server --bind 0.0.0.0:$PORT"

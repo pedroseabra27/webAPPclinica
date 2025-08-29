@@ -3,8 +3,9 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "gunicorn app_web:server --bind 0.0.0.0:$PORT"
+startCommand = "python -c 'from app_web import main; main()'"
 
 [env]
 DEBUG = "False"
 HOST = "0.0.0.0"
+PORT = "8000"

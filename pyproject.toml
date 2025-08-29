@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "webapp-clinica"
+version = "1.0.0"
+description = "Aplicação web para gerenciamento de clínica"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "dash==2.17.0",
+    "dash-bootstrap-components==1.6.0",
+    "plotly==5.18.0",
+    "sqlalchemy==2.0.23",
+    "flask==3.0.0",
+    "pandas==2.1.4",
+    "numpy==1.26.2",
+    "gunicorn==21.2.0"
+]
+
+[project.scripts]
+webapp-clinica = "app_web:main"
+
+[tool.setuptools]
+packages = ["app"]
