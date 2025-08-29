@@ -1,4 +1,5 @@
 # app_web.py - Ponto de entrada principal da aplicação
+import os
 from dash import html, dcc
 from app import app
 from app.components.sidebar import sidebar
@@ -24,4 +25,12 @@ app.layout = html.Div([
 
 # --- Roda o Servidor ---
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Configurações para produção
+    debug = os.getenv('DEBUG', 'False').lower() == 'true'
+    host = os.getenv('HOST', '127.0.0.1')
+    port = int(os.getenv('PORT', 8050))
+
+    app.run(debug=debug, host=host, port=port)
+
+# Expor o servidor para Gunicorn
+server = app.server
