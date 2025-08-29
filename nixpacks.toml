@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["python311", "gcc", "gfortran", "make"]
+nixPkgs = ["python311"]
 
 [phases.install]
 cmds = [
@@ -13,4 +13,4 @@ cmds = [
 ]
 
 [start]
-cmd = "gunicorn app_web:server --bind 0.0.0.0:$PORT"
+cmd = "python -c 'from app_web import main; main()'"
