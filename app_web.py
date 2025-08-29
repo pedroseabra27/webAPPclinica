@@ -27,9 +27,10 @@ app.layout = html.Div([
 if __name__ == '__main__':
     # Configurações para produção
     debug = os.getenv('DEBUG', 'False').lower() == 'true'
-    host = os.getenv('HOST', '127.0.0.1')
-    port = int(os.getenv('PORT', 8050))
+    host = os.getenv('HOST', '0.0.0.0')  # IMPORTANTE: Deve ser 0.0.0.0 para produção
+    port = int(os.getenv('PORT', 10000))  # Porta padrão do Render
 
+    print(f"🚀 Iniciando aplicação em {host}:{port}")
     app.run(debug=debug, host=host, port=port)
 
 def main():
