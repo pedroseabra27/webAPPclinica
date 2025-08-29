@@ -2,9 +2,47 @@
 
 Aplicação web para gerenciamento de clínica com exames em tempo real.
 
-## 🚀 Opções de Deploy
+## 🚀 Deploy no Render (Recomendado)
 
-### 1. Heroku (Recomendado)
+### Pré-requisitos:
+- Conta no [Render](https://render.com)
+- Repositório no GitHub (pode ser privado)
+
+### Passos para Deploy:
+
+1. **Acesse o Render:**
+   - Vá para [render.com](https://render.com)
+   - Clique em "New" → "Web Service"
+
+2. **Conecte seu repositório:**
+   - Selecione "Connect GitHub"
+   - Autorize o acesso ao seu repositório
+   - Selecione `webAPPclinica`
+
+3. **Configure o serviço:**
+   - **Name:** webapp-clinica
+   - **Runtime:** Python 3
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `python app_web.py`
+
+4. **Variáveis de ambiente:**
+   ```
+   DEBUG=False
+   HOST=0.0.0.0
+   PORT=10000
+   ```
+
+5. **Deploy:**
+   - Clique em "Create Web Service"
+   - O Render fará o deploy automaticamente
+   - A URL será gerada automaticamente
+
+### ✅ Vantagens do Render:
+- ✅ Aceita repositórios privados
+- ✅ Deploy automático a cada push
+- ✅ Gratuito para projetos pessoais
+- ✅ Suporte nativo a Python
+- ✅ Interface simples e intuitiva
 
 #### Pré-requisitos:
 - Conta no [Heroku](https://heroku.com)

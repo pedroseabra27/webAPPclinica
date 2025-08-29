@@ -36,8 +36,9 @@ def main():
     """Função principal para execução direta"""
     debug = os.getenv('DEBUG', 'False').lower() == 'true'
     host = os.getenv('HOST', '0.0.0.0')
-    port = int(os.getenv('PORT', 8000))
+    port = int(os.getenv('PORT', 10000))  # Porta padrão do Render
 
+    print(f"🚀 Iniciando aplicação na porta {port}")
     app.run(debug=debug, host=host, port=port)
 
 # Expor o servidor para Gunicorn

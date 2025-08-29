@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: webapp-clinica
+    runtime: python3
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app_web.py
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
